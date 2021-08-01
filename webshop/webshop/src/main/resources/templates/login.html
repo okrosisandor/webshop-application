@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+	<link th:href="@{/css/login.css}" rel="stylesheet" />
+    <title>Log In</title>
+    
+    <style>
+    	.error{
+    		color: red;
+    	}
+    </style>
+</head>
+<body>
+
+    <form action="#" th:action="@{/login}" method="POST" id="login-form">
+
+        <h2>Log In</h2>
+        
+        <div th:if="${param.code}" class="success">
+    		<p>Successful verification. Now you can log in.</p>
+    	</div>
+    	
+    	<div th:if="${param.updated}" class="success">
+    		<p>Password updated. Now you can log in.</p>
+    	</div>
+        
+        <div th:if="${param.error}" class="incorrect-login">
+        	<p>Invalid username or password.</p>
+        </div>
+        
+        <div th:if="${param.logout}" class="logged-out">
+        	<p>You have been logged out.</p>
+        </div>
+
+        <div class="input-group">
+            <input type="text" name="username" placeholder="Username" id="userName">
+            <div class="input-icon"><i class="fa fa-user"></i></div>
+            <i class="fas fa-check-circle check"></i>
+            <i class="fas fa-times-circle error"></i>
+        </div>
+        <div class="input-group">
+            <input type="password" name="password" placeholder="Password" id="password">
+            <div class="input-icon"><i class="fas fa-key"></i></div>
+            <i class="fas fa-check-circle check"></i>
+            <i class="fas fa-times-circle error"></i>
+        </div>
+        
+        <input type="hidden"                        6
+		name="${_csrf.parameterName}"
+		value="${_csrf.token}"/>
+
+        <button type="submit" id="login-button">Sign In <i class="fas fa-sign-in-alt"></i></button>
+        <h3 class="register-page">New Member?<a th:href="@{/register}">Register</a></h3>
+        <p id="forgotten-password">Forgot Password</p>
+    </form>
+
+    <form action="#" th:action="@{/customers/send}" id="forgotten-password-form" method="POST">
+    	<input type="hidden" name="showText" th:value="${showText}" />
+        <h2 th:text="${showText}" class="email-sent"></h2>
+
+        <h2 class="enter-email">Enter Your Email Address</h2>
+
+        <input type="text" name="theEmail" placeholder="Enter email address">
+        <button type="submit">Ok</button>
+    </form>
+
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+</body>
+</html>

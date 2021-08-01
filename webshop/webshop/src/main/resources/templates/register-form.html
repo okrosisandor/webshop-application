@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link th:href="@{/css/register.css}" rel="stylesheet" />
+    <title>Sign Up</title>
+</head>
+<body>
+    <form action="#" th:action="@{/customers/save}" th:object="${customerDTO}" method="POST" id="register-form">
+
+        <h2>Sign Up</h2>
+        
+        <div th:if="${param.success}" class="activation-info">
+    		<p>Activation email has been sent. Please check your inbox.</p>
+    	</div>
+
+        <div class="info">
+            <div class="general">
+                <p><span>1</span>General Information</p>
+
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.userName}" name="" id="username" placeholder="Username">
+                    <p th:if="${#fields.hasErrors('customer.userName')}" th:errors="*{customer.userName}" class="error-message"></p>
+                    <div class="input-icon"><i class="fa fa-user"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.firstName}" name="" id="" placeholder="First Name">
+                    <p th:if="${#fields.hasErrors('customer.firstName')}" th:errors="*{customer.firstName}" class="error-message"></p>
+                    <div class="input-icon"><i class="fa fa-user"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.lastName}" name="" id="" placeholder="Last Name">
+                    <p th:if="${#fields.hasErrors('customer.lastName')}" th:errors="*{customer.lastName}" class="error-message"></p>
+                    <div class="input-icon"><i class="fa fa-user"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="email" th:field="*{customer.email}" name="" id="email" placeholder="Email">
+                    <p th:if="${#fields.hasErrors('customer.email')}" th:errors="*{customer.email}" class="error-message"></p>
+                    <div class="input-icon"><i class="fas fa-envelope"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" th:field="*{customer.password}" name="" id="password" placeholder="Password">
+                    <p th:if="${#fields.hasErrors('customer.password')}" th:errors="*{customer.password}" class="error-message"></p>
+                    <h3 class="error-message"></h3>
+                    <div class="input-icon"><i class="fas fa-key"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" th:field="*{password2}" name="" id="" placeholder="Password">
+                    <p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class="error-message"></p>
+                    <h3 class="error-message"></h3>
+                    <div class="input-icon"><i class="fas fa-key"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+
+            </div>
+
+
+            <div class="contact">
+                <p><span>2</span>Contact Details</p>
+
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.customerAddress.country}" name="" id="" placeholder="Country">
+                    <p th:if="${#fields.hasErrors('customer.customerAddress.country')}" th:errors="*{customer.customerAddress.country}" class="error-message"></p>
+                    <div class="input-icon"><i class="fas fa-globe"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.customerAddress.city}" name="" id="" placeholder="City">
+                    <p th:if="${#fields.hasErrors('customer.customerAddress.city')}" th:errors="*{customer.customerAddress.city}" class="error-message"></p>
+                    <div class="input-icon"><i class="fas fa-city"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.customerAddress.zipCode}" name="" id="" placeholder="Zip Code">
+                    <p th:if="${#fields.hasErrors('customer.customerAddress.zipCode')}" th:errors="*{customer.customerAddress.zipCode}" class="error-message"></p>
+                    <div class="input-icon"><i class="fas fa-map-pin"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.customerAddress.address}" name="" id="" placeholder="Address">
+                    <p th:if="${#fields.hasErrors('customer.customerAddress.address')}" th:errors="*{customer.customerAddress.address}" class="error-message"></p>
+                    <div class="input-icon"><i class="fas fa-map"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" th:field="*{customer.customerAddress.phone}" name="" id="" placeholder="Phone">
+                    <p th:if="${#fields.hasErrors('customer.customerAddress.phone')}" th:errors="*{customer.customerAddress.phone}" class="error-message"></p>
+                    <div class="input-icon"><i class="fas fa-phone"></i></div>
+                    <i class="fas fa-check-circle check" id="check"></i>
+                    <i class="fas fa-times-circle error" id="error"></i>
+                </div>
+
+            </div>
+    </div>
+
+        <button type="submit" id="sign-up-button">Sign Up <i class="fas fa-user-plus"></i></button>
+        <h3 class="login-page">Already have an account? <a th:href="@{/login}">Log in</a></h3>
+    </form>
+    
+    <script type="text/javascript" th:src="@{/js/register.js}"></script>
+
+</body>
+</html>

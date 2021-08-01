@@ -1,0 +1,660 @@
+
+/* Employee details */
+
+.employee-selection{
+    background-color: black;
+    color: white;
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.employee-selection .active{
+    background-color: red;
+}
+
+.employee-selection .inactive{
+    background-color: black;
+}
+
+.purchased-goods, .settings{
+    display: none;
+}
+
+.employee-selection > div{
+    cursor: pointer;
+    border-right: 1px solid white;
+    text-align: center;
+    width: 33.33%;
+    padding: 1rem 0;
+}
+
+.employee-selection > div p{
+	display: inline;
+}
+
+.employee-selection .inactive:hover{
+    color: yellow;
+}
+
+.employee-selection i{
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+
+.previous-orders, .statistics{
+	display: none;
+}
+
+.total-price{
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
+
+/* product list */
+
+.product-list .product{
+    display: grid;
+    grid-template-columns: minmax(160px, 1fr) 2fr 1fr;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    background-color: #eee;
+    padding: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.product img, .product .info, .product .remove{
+    height: 150px;
+    width: auto;
+}
+
+.product img{
+	width: 150px;
+}
+
+.product .info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 150px;
+    margin-left: -2rem;
+}
+
+.product .info .date-of-order{
+    font-size: 1.5rem;
+    margin: auto;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.info .price{
+    margin: 1rem auto 0 auto;
+	font-size: 1.7rem;
+	font-weight: bolder;
+}
+
+.info .price, .info > h3{
+    display: inline;
+    text-align: center;
+}
+
+.info > h3{
+	font-size: 1.5rem;
+    font-weight: bolder;
+	margin: auto;
+}
+
+.product .info .price p{
+	display: inline;
+}
+
+.product .processed a{
+    background-color: #115AA3;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 1.2rem;
+    border: none;
+    border-radius: 7px;
+    display: inline;
+}
+
+.product .processed a:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+}
+
+.product .processed a, .product .processed .details, .product .processed .reviews{
+	width: 80%;
+}
+
+.purchaser-details, .review-details{
+    margin: 1rem auto 0 auto;
+    text-align: center;
+}
+
+.purchaser-details, .review-details .already-reviewed div:first-of-type{
+	margin-top: 1.5rem;
+}
+
+.purchaser-details div, .review-details div{
+    font-size: 1.4rem;
+    margin: 0.8rem;
+}
+
+.purchaser-details div p, .review-details div p{
+	display: inline;
+}
+
+.review-details p{
+    font-size: 1.3rem;
+}
+
+.review-details h2{
+    font-size: 1.6rem;
+    margin: 0.5rem;
+}
+
+.not-reviewed{
+	display: none;
+}
+
+.not-reviewed div{
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+}
+
+.purchaser-details .done, .review-details .done{
+    color: green;
+}
+
+.purchaser-details .undone, .review-details .undone{
+    color: red;
+}
+
+.product .processed{
+    font-size: 1.8rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.product .processed p{
+    background-color: #115AA3;
+    width: 70%;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 1.2rem;
+    border-radius: 7px;
+}
+
+.product .processed p:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+}
+
+.product .processed i{
+    padding-left: 0.4rem;
+    font-size: 1.8rem;
+}
+
+
+.customer-details-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.customer-details-modal .modal-content{
+    position: absolute;
+    top: 20%;
+    min-height: 60vh;
+    left: 25%;
+    width: 50%;
+    background-color: #eee;
+    animation: standingOrdersModal 0.8s;
+}
+
+.customer-details-modal .top{
+    height: 50px;
+    background-color: #ddd;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.customer-details-modal .top p{
+    position: absolute;
+    right: 2%;
+    top: 20%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+@keyframes standingOrdersModal{
+    0%{
+        opacity: 0;
+        top: -1000px;
+    }
+
+    100%{
+        opacity: 1;
+        top: 20%;
+    }
+}
+
+
+.former-customer-details-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.former-customer-details-modal .modal-content{
+    position: absolute;
+    top: 20%;
+    min-height: 60vh;
+    left: 25%;
+    width: 50%;
+    background-color: #eee;
+    animation: previousOrdersModal 0.8s;
+}
+
+.former-customer-details-modal .top{
+    height: 50px;
+    background-color: #ddd;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.former-customer-details-modal .top p{
+    position: absolute;
+    right: 2%;
+    top: 20%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+@keyframes previousOrdersModal{
+    0%{
+        opacity: 0;
+        top: -1000px;
+    }
+
+    100%{
+        opacity: 1;
+        top: 20%;
+    }
+}
+
+
+.former-customer-review-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.former-customer-review-modal .modal-content{
+    position: absolute;
+    top: 20%;
+    min-height: 60vh;
+    left: 25%;
+    width: 50%;
+    background-color: #eee;
+    animation: previousReviewModal 0.8s;
+}
+
+.former-customer-review-modal .top{
+    height: 50px;
+    background-color: #ddd;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.former-customer-review-modal .top p{
+    position: absolute;
+    right: 2%;
+    top: 20%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.former-customer-review-modal .review-details div{
+	font-weight: 600;
+	font-size: 1.7rem;
+}
+
+.former-customer-review-modal .review-details h1, .former-customer-review-modal .review-details h2{
+	display: inline;
+	font-weight: 600;
+	font-size: 1.7rem;
+}
+
+.former-customer-review-modal .rated h2{
+	margin: 0;
+	padding: 0;
+}
+
+@keyframes previousReviewModal{
+    0%{
+        opacity: 0;
+        top: -1000px;
+    }
+
+    100%{
+        opacity: 1;
+        top: 20%;
+    }
+}
+
+
+/* statistics */
+
+.statistics{
+    margin: 3rem 0;
+    background-color: #eee;
+}
+
+.stats{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    grid-gap: 50px;
+}
+
+.stat-group{
+    border: none;
+    color: #ddd;
+    border-radius: 7px;
+}
+
+.stat-group h2{
+    text-align: center;
+    font-size: 2.3rem;
+    background-color: #111;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 0.3rem;
+}
+
+.stat-group h1{
+    font-size: 2.1rem;
+    margin-top: 1rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 0.2em;
+}
+
+.stat-group .grid-item{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-group .grid-item div{
+    justify-self: start;
+}
+
+.stat-group .grid-item i{
+    justify-self: end;
+    font-size: 3rem;
+    margin-right: 1rem;
+}
+
+.visitors{
+    background-color: #077327;
+}
+
+.registrations{
+    background-color: #25557A;
+}
+
+.orders{
+    background-color: red;
+}
+
+.income{
+    background-color: darkorange;
+}
+
+
+/* media */
+
+@media(max-width:1350px){
+    .product .info h3{
+        text-align: center;
+    }
+    
+    .product .processed{
+        font-size: 1.4rem;
+    }
+
+    .product .info{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product .info h3:last-of-type{
+        font-size: 1.1rem;
+    }
+}
+
+@media(max-width: 1050px){
+    .employee-selection{
+        font-size: 1.3rem;
+    }
+
+    .stat-group h2{
+        font-size: 2rem;
+    }
+
+    .stat-group h1{
+        font-size: 1.8rem;
+    }
+
+    .stat-group h3{
+        font-size: 1.1rem;
+    }
+
+    .stat-group .grid-item i{
+        margin-right: 0.2rem;
+    }
+
+    .stats{
+        grid-gap: 30px;
+    }
+}
+
+@media(max-width:1000px){
+    .product .info .date-of-order{
+        font-size: 1.5rem;
+    }
+
+    .product-list .processed{
+        font-size: 1.4rem;
+    }
+
+    .product .processed a, .product .processed .details,  .product .processed .reviews{
+        width: 90%;
+    }
+
+    .customer-details-modal .modal-content, .former-customer-details-modal .modal-content, .former-customer-review-modal .modal-content{
+        width: 60%;
+        left: 20%;
+    }
+}
+
+@media(max-width: 900px){
+    .employee-selection{
+        font-size: 1.2rem;
+    }
+
+    .stat-group .grid-item{
+        grid-template-columns: 1fr;
+    }
+
+    .stat-group .grid-item i{
+        justify-self: center;
+        order: 1;
+    }
+
+    .stat-group .grid-item div{
+        justify-self: center;
+        text-align: center;
+        order: 2;
+    }
+}
+
+@media(max-width:870px){
+    .product-list .product{
+        grid-template-areas: 
+            'image image image'
+            'info info info'
+            'processed processed processed';
+        grid-row-gap: 30px;
+    } 
+
+    .container{
+        width: 90%;
+    }
+
+    .product img{
+        margin: auto;
+        grid-area: image;
+        height: 300px;
+        width: 300px;
+        margin-top: 2rem;
+    }
+
+    .product .info{
+        height: 150px;
+        grid-area: info;
+        text-align: center;
+        margin: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .product .processed{
+        grid-area: processed;
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .product .processed a, .product .processed .details,  .product .processed .reviews{
+        width: 60%;
+    } 
+
+    .product .info .date-of-order{
+        font-size: 1.4rem;
+    }
+
+    .customer-details-modal .modal-content, .former-customer-details-modal .modal-content, .former-customer-review-modal .modal-content{
+        width: 70%;
+        left: 15%;
+    }
+
+    .purchaser-details div{
+        font-size: 1.3rem;
+    }
+
+    .already-reviewed p{
+        font-size: 1.2rem;
+    }
+}
+
+@media(max-width: 800px){
+    .employee-selection{
+        display: block;
+        font-size: 1.3rem;
+    }
+
+    .employee-selection div{
+        width: 100%;
+    }
+
+    .stat-group h2{
+        font-size: 1.8rem;
+    }
+
+    .stat-group h1{
+        font-size: 1.6rem;
+    }
+
+    .stat-group h3{
+        font-size: 1rem;
+    }
+}
+
+@media(max-width: 720px){
+    .stats{
+        grid-template-columns: 1fr;
+    }
+
+    .stat-group h2{
+        font-size: 2.6rem;
+    }
+
+    .stat-group h1{
+        font-size: 2.4rem;
+    }
+
+    .stat-group h3{
+        font-size: 1.4rem;
+    }
+}
+
+@media(max-width:650px){
+    .customer-details-modal .modal-content, .former-customer-details-modal .modal-content, .former-customer-review-modal .modal-content{
+        width: 90%;
+        left: 5%;
+    }
+
+    .already-reviewed p{
+        font-size: 1.1rem;
+    }
+
+    .product img{
+        height: 250px;
+        width: 250px;
+    }
+}
+
+@media(max-width:500px){
+    .purchaser-details div{
+        font-size: 1.1rem;
+    }
+}

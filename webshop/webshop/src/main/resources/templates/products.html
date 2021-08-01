@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/menu}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link th:href="@{/css/products.css}" rel="stylesheet" />
+    <title>Products</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+        <div class="filter-section">
+            <p>[[${totalItems}]] product(s), <span>[[${totalPages}]] page(s)</span></p>
+
+            <form th:action="@{/products/page/1}" class="price-filter">
+            	<input type="hidden" name="sortField" th:value="${sortField}" />
+            	<input type="hidden" name="sortDir" th:value="${sortDir}" />
+            	<input type="hidden" name="keyword" th:value="${keyword}" />
+            	<input type="hidden" name="category" th:value="${category}" />
+            	
+                <input type="text" name="minPrice" th:value="${minPrice != 0 ? minPrice : ''}" id="" placeholder="Min">
+                <p>-</p>
+                <input type="text" name="maxPrice" th:value="${maxPrice != 1000050 ? maxPrice : ''}" id="" placeholder="Max">
+
+                <button type="submit">OK</button>
+            </form>
+
+            <div class="sorting">
+            	<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=rating&sortDir=' + ${reverseSortDir}+ '&category=' + ${category}+ '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice} + ${keyword != null ? '&keyword=' + keyword : ''}}">Rating
+                    <i class="fas fa-sort-amount-down"></i>
+                </a>
+                <a th:href="@{'/products/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}+ '&category=' + ${category}+ '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice} + ${keyword != null ? '&keyword=' + keyword : ''}}">Cheap 
+                    <i class="fas fa-sort-numeric-down"></i>
+                </a>
+                <a th:href="@{'/products/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}+ '&category=' + ${category}+ '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice} + ${keyword != null ? '&keyword=' + keyword : ''}}">Name
+                	<i class="fas fa-sort-alpha-down"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div sec:authorize="hasRole('ROLE_EMPLOYEE')" id="product-upload">
+            <a th:href="@{/products/upload}">Upload Product</a>
+        </div>
+
+        <div class="product-list">
+            <div th:each="theProduct : ${products}" class="product">
+               <img th:if="${#strings.length(theProduct.image) > 0}" th:src="*{'data:image/jpeg;base64,'+{theProduct.image}}" class="image">
+               
+               <img th:if="${#strings.length(theProduct.image) == 0}" th:src="@{/img/picture-not-available.jpg}" class="image">
+
+                <div class="info">
+                    <h3 th:text="${theProduct.name}"></h3>
+                    <div class="review">
+                        <div class="stars-outer">
+	                        <div class="stars-inner"></div>
+	                    </div>
+                        <p><span>(</span><span th:text="${#lists.size(theProduct.productRatings)}" class="number"></span><span> reviews)</span></p>
+                    </div>
+                    
+                    <h4 th:text="${theProduct.rating}" class="average-rating"></h4>
+                    <a th:href="@{/products/productDetail/1(productId=${theProduct.id})}" class="details">Details</a>
+                </div>
+
+                <div class="order">
+                    <p class="currency">$<p th:text="${theProduct.price}" class="price"></p> </p>
+                    <form action="#" th:action="@{/customers/addtocart(productId=${theProduct.id})}" class="cart">
+                    	<input type="hidden" name="productId" th:value="${theProduct.id}" />
+                        <input type="text" name="quantity" id="" placeholder="Quantity" min="1">
+                        <button type="submit"><i class="fas fa-shopping-cart"></i></button>
+                    </form>
+                </div>
+            </div>
+
+        	
+        	<div th:if = "${totalPages > 1}" class="pages">
+        	
+				<a th:if="${currentPage > 1}" th:href="@{'/products/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&category=' + ${category}  + '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice}+ ${keyword != null ? '&keyword=' + keyword : ''}}"><i class="fas fa-chevron-left"></i></a>
+				
+				<span th:if="${currentPage < 4}">
+					<span th:each="i: ${#numbers.sequence(1, totalPages > 5 ? 5 : totalPages)}">
+					
+						<a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&category=' + ${category} + '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice}+ ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+				
+				<span th:if="${currentPage == totalPages and currentPage == 4}">
+					<span th:each="i: ${#numbers.sequence(totalPages - 4 > 1 ? totalPages - 4 : 1, totalPages)}">
+					
+						<a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&category=' + ${category}  + '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice}+ ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+				
+				<span th:if="${currentPage > totalPages - 2 and totalPages > 4}">
+					<span th:each="i: ${#numbers.sequence(totalPages - 4 > 1 ? totalPages - 4 : 1, totalPages)}">
+					
+						<a th:if="${currentPage != i}" th:href="@{'/products/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&category=' + ${category}  + '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice}+ ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+				
+				
+				<span th:if="${currentPage gt 3 and currentPage lt totalPages - 1}">
+					<span th:each="i: ${#numbers.sequence(currentPage - 2, currentPage + 2)}">
+					
+						<a th:href="@{'/products/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&category=' + ${category}  + '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice}+ ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+					
+				<a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&category=' + ${category}  + '&minPrice=' + ${minPrice} + '&maxPrice=' + ${maxPrice}+ ${keyword != null ? '&keyword=' + keyword : ''}}"><i class="fas fa-chevron-right"></i></a>
+   				 
+	        </div>
+        	
+        </div>
+        
+        <script type="text/javascript" th:src="@{/js/products.js}"></script>
+        
+    </div>
+    
+</body>
+</html>

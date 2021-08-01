@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right, #4DA0B0, #D39D38);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#upload-form{
+    width: 40%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 35px black;
+    text-align: center;
+    margin-top: -0.6rem;
+}
+
+#upload-form h2{
+    text-align: center;
+    border-bottom: 2px solid black;
+    width: 45%;
+    padding-top: 1.5rem;
+    margin: 1.5rem auto;
+    padding-bottom: 0.4rem;
+    font-size: 1.7rem;
+}
+
+#upload-form h2:hover{
+    text-shadow: 0px 0px 5px black;
+    border-bottom: 3px solid black;
+    transition: all 0.2s ease-in;
+}
+
+#upload-form input{
+    border-radius: 8px;
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    outline: none;
+    width: 70%; 
+    padding: 12px;
+    margin: 8px 0; 
+    display: inline-block; 
+}
+
+#upload-form .check, #upload-form .error, #upload-form .incorrect-input{
+	display: none;
+}
+
+.incorrect-input{
+	color: red;
+	font-size: 1.1rem;
+	display: none;
+	text-align: left;
+	margin-left: 15%;
+}
+
+.input-section{
+    position: relative;
+}
+
+.input-section .input-icon{
+    color: #115AA3;
+    font-size: 1.2rem;
+}
+
+.input-section > .check, .input-section > .error{
+    position: absolute;
+    right: 18%;
+    font-size: 1.4rem;
+}
+
+.input-section > .check{
+	top: 33%;
+	color: #03A91D;
+}
+
+.input-section > .error{
+    color: red;
+}
+
+.input-section textarea{
+    width: 70%;
+    height: 100px;
+    border-radius: 8px;
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+select{
+    width: 70%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    outline: none;
+    margin: 8px 0; 
+}
+
+.bs-group{
+    width: 70%;
+    height: 75px;
+}
+
+.bs-group:hover{
+    box-shadow: 0px 0px 20px #91ECDB;
+    transition: all 0.2s ease-in;
+}
+
+.bs-group input, .bs-group label{
+    cursor: pointer;
+    text-align: left;
+    height: 75px;
+}
+
+.bs-group label{
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    display: block;
+    padding-right: 50px;
+}
+
+.button-group{
+    height: 80px;
+}
+
+#upload-button{
+    display: block;
+    margin: 0.6rem auto;
+    margin-bottom: 1.6rem;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 7px;
+    background-color: #115AA3;
+    border: none;
+    color: #222;
+    cursor: default;
+}
+
+#upload-button i{
+    margin-left: 0.3rem;
+}
+
+#upload-button:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 0px 10px #115AA3;
+}
+
+#upload-form input:focus, #upload-form select:focus, #upload-form textarea:focus{
+    box-shadow: 0 0 20px #91ECDB;
+}
+
+#upload-form input[type=text]{
+	padding-right: 50px;
+}
+
+#upload-form textarea{
+	padding-right: 30px;
+}
+
+
+/* media */
+
+@media(max-width: 1060px){
+    #upload-form{
+        width: 50%;
+    }
+}
+
+@media(max-width: 850px){
+    #upload-form{
+        width: 65%;
+    }
+}
+
+@media(max-width: 670px){
+    #upload-form{
+        width: 80%;
+    }
+
+    #upload-form h2{
+        width: 50%;
+    }
+}
+
+@media(max-width: 500px){
+    #upload-form{
+        width: 90%;
+    }
+
+    #upload-form h2{
+        width: 60%;
+    }
+}
+
+   
