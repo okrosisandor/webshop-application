@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/menu}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link th:href="@{/css/employee-page.css}" rel="stylesheet" />
+    <title>Employee Details</title>
+</head>
+<body>
+        
+	<div layout:fragment="content">
+
+        <div class="employee-selection">
+            <div class="active" id="show-standing-orders">Standing Orders <i class="fas fa-shopping-bag"></i> (<p th:text="${#lists.size(standingProducts)}"></p>)</div>
+            <div class="inactive" id="show-previous-orders">Previous Orders <i class="fas fa-shopping-bag"></i> (<p th:text="${#lists.size(previousOrders)}"></p>)</div>
+            <div class="inactive" id="show-statistics">Statistics <i class="fas fa-chart-pie"></i></div>
+        </div>
+
+        <!-- Standing Orders-->
+
+        <div class="standing-orders">
+
+            <div class="product-list">
+                
+                <div th:each="standingProduct : ${standingProducts}" class="product">
+                	<img th:if="${#strings.length(standingProduct.product.image) > 0}" th:src="*{'data:image/jpeg;base64,'+{standingProduct.product.image}}">
+               
+               		<img th:if="${#strings.length(standingProduct.product.image) == 0}" th:src="@{/img/picture-not-available.jpg}">
+
+                    <div class="info">
+                       	<h2 th:text="${#dates.format(standingProduct.orderDate, 'yyyy.MM.dd HH:mm')}" class="date-of-order"></h2>
+                        <h3 th:text="${standingProduct.product.name}"></h3>
+                        <div class="price">$<p th:text="${standingProduct.product.price}"></p> * <p th:text="${standingProduct.quantity}"></p> = $<p th:text="${#numbers.formatDecimal((standingProduct.product.price * standingProduct.quantity), 1, 2, 'POINT')}"></p></div>
+                    </div>
+
+                    <div class="processed">
+                        <a th:href="@{/products/processed(id=${standingProduct.id})}">Processed <i class="fas fa-trash"></i></a>
+                        <p class="details">Details <i class="fas fa-info-circle"></i></p>
+                    </div>
+
+                    <div class="customer-details-modal">
+                        <div class="modal-content">
+                            <div class="top">
+                                <p id="close"><i class="far fa-times-circle"></i></p>
+                            </div>
+                            <div class="purchaser-details">
+                                <div>Date Of Order: <p th:text="${#dates.format(standingProduct.orderDate, 'yyyy.MM.dd HH:mm')}">2021.05.09. 17:22</p></div>
+                                <div class="price">Total price: $<p th:text="${standingProduct.product.price}"></p> * <p th:text="${standingProduct.quantity}"></p> = $<p th:text="${#numbers.formatDecimal((standingProduct.product.price * standingProduct.quantity), 1, 2, 'POINT')}"></p></div>
+                                <div>Username: <p th:text="${standingProduct.customer.userName}">John123</p></div>
+                                <div>Full Name: <p th:text="${standingProduct.customer.firstName}"></p><p> </p><p th:text="${standingProduct.customer.lastName}"></p></div>
+                                <div>Email: <p th:text="${standingProduct.customer.email}">john@gmail.com</p></div>
+                                <div>Phone: <p th:text="${standingProduct.customer.customerAddress.phone}">022-917-635</p></div>
+                                <div>Address: <p th:text="${standingProduct.customer.customerAddress.address}">3700, Kazincbarika Béke tér 18 2/3</p></div>
+                                
+                                <div th:if="${standingProduct.alreadyPaid}">Already paid: <p><i class="fas fa-check done"></i></p></div>
+                                <div th:unless="${standingProduct.alreadyPaid}">Already paid: <p><i class="fas fa-times undone"></i></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+
+        <div class="previous-orders">
+            <div class="product-list">
+                
+                <div th:each="previousItem : ${previousOrders}" class="product">
+                	<img th:if="${#strings.length(previousItem.product.image) > 0}" th:src="*{'data:image/jpeg;base64,'+{previousItem.product.image}}">
+               
+               		<img th:if="${#strings.length(previousItem.product.image) == 0}" th:src="@{/img/picture-not-available.jpg}">
+
+                    <div class="info">
+                       	<h2 th:text="${#dates.format(previousItem.orderDate, 'yyyy.MM.dd HH:mm')}" class="date-of-order"></h2>
+                        <h3 th:text="${previousItem.product.name}"></h3>
+                        <div class="price">$<p th:text="${previousItem.product.price}"></p> * <p th:text="${previousItem.quantity}"></p> = $<p th:text="${#numbers.formatDecimal((previousItem.product.price * previousItem.quantity), 1, 2, 'POINT')}"></p></div>
+                    </div>
+
+                    <div class="processed">
+                        <p class="details">Details <i class="fas fa-info-circle"></i></p>
+                        <p class="reviews">Review <i class="fas fa-info-circle"></i></p>
+                    </div>
+
+                    <div class="customer-details-modal">
+                        <div class="modal-content">
+                            <div class="top">
+                                <p id="close"><i class="far fa-times-circle"></i></p>
+                            </div>
+                            <div class="purchaser-details">
+                                <div>Date Of Order: <p th:text="${#dates.format(previousItem.orderDate, 'yyyy.MM.dd HH:mm')}">2021.05.09. 17:22</p></div>
+                                <div class="price">Total price: $<p th:text="${previousItem.product.price}"></p> * <p th:text="${previousItem.quantity}"></p> = $<p th:text="${#numbers.formatDecimal((previousItem.product.price * previousItem.quantity), 1, 2, 'POINT')}"></p></div>
+                                <div>Username: <p th:text="${previousItem.customer.userName}">John123</p></div>
+                                <div>Full Name: <p th:text="${previousItem.customer.firstName}"></p><p> </p><p th:text="${previousItem.customer.lastName}"></p></div>
+                                <div>Email: <p th:text="${previousItem.customer.email}">john@gmail.com</p></div>
+                                <div>Phone: <p th:text="${previousItem.customer.customerAddress.phone}">022-917-635</p></div>
+                                <div>Address: <p th:text="${previousItem.customer.customerAddress.address}">3700, Kazincbarika Béke tér 18 2/3</p></div>
+                                
+                                <div th:if="${previousItem.alreadyPaid}">Already paid: <p><i class="fas fa-check done"></i></p></div>
+                                <div th:unless="${previousItem.alreadyPaid}">Already paid: <p><i class="fas fa-times undone"></i></p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="former-customer-review-modal">
+                        <div class="modal-content">
+                            <div class="top">
+                                <p id="close"><i class="far fa-times-circle"></i></p>
+                            </div>
+                            <div class="review-details">
+                                
+                                
+                                <div th:each="theRating : ${previousItem.product.productRatings}" class="rated">
+	                                 <div th:if="${previousItem.customer.id == theRating.customer.id}" class="already-reviewed">
+	                                 	<h2>Already reviewed: <i class="fas fa-check done"></i></h2>
+	                                    <div><h2 th:text="${theRating.customer.userName}"></h2><h2>'s Rating: </h2><h2 th:text="${theRating.rating}"></h2></div>
+	                                    <div><h2 th:text="${theRating.customer.userName}"></h2><h2>'s opinion:</h2></div>
+	                                    <p th:text="${theRating.opinion}"></p>
+	                                </div>
+								</div>
+								
+								<div class="not-reviewed">
+									<h2>Already reviewed: <i class="fas fa-times undone"></i></h2>
+	                                <div>User <h1 th:text="${previousItem.customer.userName}"></h1><h1> hasn't made a review jet.</h1></div>
+	                            </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <div class="statistics">
+
+            <div class="stats">
+
+                <div class="stat-group visitors">
+                    <div class="content">
+                        <h2>Today</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${todaysVisitors}"></h1>
+                                <h3>Unique Visitors</h3>
+                            </div>
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group visitors">
+                    <div class="content">
+                        <h2>This Month</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${thisMonthsVisitors}"></h1>
+                                <h3>Unique Visitors</h3>
+                            </div>
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group visitors">
+                    <div class="content">
+                        <h2>Total</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${totalVisitors}"></h1>
+                                <h3>Unique Visitors</h3>
+                            </div>
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group registrations">
+                    <div class="content">
+                        <h2>Today</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${todaysRegistrations}"></h1>
+                                <h3>User Registrations</h3>
+                            </div>
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group registrations">
+                    <div class="content">
+                        <h2>This Month</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${thisMonthsRegistrations}"></h1>
+                                <h3>User Registrations</h3>
+                            </div>
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group registrations">
+                    <div class="content">
+                        <h2>Total</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${totalRegistrations}"></h1>
+                                <h3>User Registrations</h3>
+                            </div>
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group orders">
+                    <div class="content">
+                        <h2>Today</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${todaysOrders}"></h1>
+                                <h3>New Orders</h3>
+                            </div>
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group orders">
+                    <div class="content">
+                        <h2>This Month</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${thisMonthsOrders}"></h1>
+                                <h3>New Orders</h3>
+                            </div>
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group orders">
+                    <div class="content">
+                        <h2>Total</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1 th:text="${totalOrders}"></h1>
+                                <h3>New Orders</h3>
+                            </div>
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group income">
+                    <div class="content">
+                        <h2>Today</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1>$<span th:text="${todaysIncome}"></span></h1>
+                                <h3>Income</h3>
+                            </div>
+                            <i class="fas fa-money-bill"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group income">
+                    <div class="content">
+                        <h2>This Month</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1>$<span th:text="${thisMonthsIncome}"></span></h1>
+                                <h3>Income</h3>
+                            </div>
+                            <i class="fas fa-money-bill"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-group income">
+                    <div class="content">
+                        <h2>Total</h2>
+                        <div class="grid-item">
+                            <div>
+                                <h1>$<span th:text="${totalIncome}"></span></h1>
+                                <h3>Income</h3>
+                            </div>
+                            <i class="fas fa-money-bill"></i>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+		<script type="text/javascript" th:src="@{/js/employee-page.js}"></script>
+
+    </div>
+
+</body>
+</html>

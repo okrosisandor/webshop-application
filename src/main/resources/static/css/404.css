@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.4)), url("../img/lost.jpg") center/cover no-repeat;
+    height: 100vh;
+}
+
+div{
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  left: calc(50% - 250px);
+  top: calc(50% - 150px);
+  text-align: center;
+  color: white;
+}
+
+h1{
+    font-size: 200px;
+    margin-top: -1rem;
+}
+
+span{
+    display: block;
+    background-image: url("../img/fire.jpg");
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: fire 4s linear infinite;
+    -webkit-backface-visibility: hidden;
+}
+
+p{
+    font-size: 1.6rem;
+    margin-top: -1rem;
+    padding-bottom: 1rem;
+}
+
+a{
+    color: yellow;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: red;
+}
+
+i{
+    font-size: 1.4rem;
+    padding-left: 0.1rem;
+}
+
+@keyframes fire{
+    0%{
+        background-position: 0% -50%;
+    }
+
+    0%{
+        background-position: 100% -50%;
+    }
+}
+
+@media(max-width: 600px){
+    h1{
+        font-size: 150px;
+        margin-bottom: 1rem;
+    }
+
+    p, a{
+        font-size: 1.3rem;
+    }
+}

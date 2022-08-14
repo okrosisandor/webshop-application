@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/menu}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link th:href="@{/css/product-categories.css}" rel="stylesheet" />
+    <title>Home</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+        <section class="categories">
+            <a th:href="@{/products/products/Bedroom Accessories}" class="category">
+                <i class="fas fa-couch"></i>
+                <p>Bedroom accessories</p>
+                <p th:text=${numOfBedroomAccessories} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Bathroom Accessories}" class="category">
+                <i class="fas fa-bath"></i>
+                <p>Bathroom accessories</p>
+                <p th:text=${numOfBathroomAccessories} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Vehicles}" class="category">
+                <i class="fas fa-car"></i>
+                <p>Vehicles</p>
+                <p th:text=${numOfVehicles} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Computers}" class="category">
+                <i class="fas fa-desktop"></i>
+                <p>Computers</p>
+                <p th:text=${numOfComputers} class="number-of-items-in-category"></p>
+            </a>
+
+           	<a th:href="@{/products/products/Sport}" class="category">
+                <i class="fas fa-futbol"></i>
+                <p>Sport</p>
+                <p th:text=${numOfSport} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Laptops}" class="category">
+                <i class="fas fa-laptop"></i>
+                <p>Laptops</p>
+                <p th:text=${numOfLaptops} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Mobiles}" class="category">
+                <i class="fas fa-mobile-alt"></i>
+                <p>Mobiles</p>
+                <p th:text=${numOfMobiles} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Tablets}" class="category">
+                <i class="fas fa-tablet-alt"></i>
+                <p>Tablets</p>
+                <p th:text=${numOfTablets} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Tools}" class="category">
+                <i class="fas fa-tools"></i>
+                <p>Tools</p>
+                <p th:text=${numOfTools} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Clothes}" class="category">
+                <i class="fas fa-tshirt"></i>
+                <p>Clothes</p>
+                <p th:text=${numOfClothes} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/TV}" class="category">
+                <i class="fas fa-tv"></i>
+                <p>TV</p>
+                <p th:text=${numOfTV} class="number-of-items-in-category"></p>
+            </a>
+
+            <a th:href="@{/products/products/Kitchen Accessories}" class="category">
+                <i class="fas fa-utensils"></i>
+                <p>Kitchen accessories</p>
+                <p th:text=${numOfKitchenAccessories} class="number-of-items-in-category"></p>
+            </a>
+
+        </section>
+
+
+    </div>
+</body>
+</html>

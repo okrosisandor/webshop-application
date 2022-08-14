@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+	<link th:href="@{/css/menu.css}" rel="stylesheet" />
+</head>
+<body>
+    
+    <div class="container">
+    	<div class="top-menu">
+            <a th:href="@{/}" class="logo">
+                <h2>MyShop</h2>
+                <p>For Your Needs</p>
+            </a>
+
+            <form th:action="@{/products/displayProducts}" class="main-search">  	
+               	<input type="text" name="keyword" id="" placeholder="Enter Input">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div sec:authorize="isAuthenticated()" class="login">
+                <div sec:authorize="hasRole('ROLE_USER')"><p>Logged in as: <a sec:authentication="principal.username" th:href="@{/customers/user}">User</a></p></div>
+                <div sec:authorize="hasRole('ROLE_EMPLOYEE')" class="employee-page"><p><a th:href="@{/customers/employee}">Employee Page</a></p></div>
+                <a th:href="@{/logout}" class="logout">Logout</a>
+            </div>
+
+			
+            <div sec:authorize="isAnonymous()" class="login-page">
+                <a th:href="@{/login}">Login</a>
+                / 
+                <a th:href="@{/register}">Register</a>
+            </div>
+        </div>
+        
+        <div layout:fragment="content"></div>
+        
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right, #4DA0B0, #D39D38);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#login-form{
+    width: 40%;
+    margin: 6rem auto 0rem auto;
+    box-shadow: 0px 0px 35px black;
+    text-align: center;
+}
+
+#login-form .success{
+	font-size: 1.1rem;
+	color: darkgreen;
+	margin-top: -0.5rem;
+	margin-bottom: 0.3rem;
+	font-weight: bold;
+}
+
+#login-form h2{
+    text-align: center;
+    border-bottom: 2px solid black;
+    width: 25%;
+    padding-top: 1.5rem;
+    margin: 1.5rem auto;
+    padding-bottom: 0.4rem;
+    font-size: 1.7rem;
+}
+
+#login-form h2:hover{
+    text-shadow: 0px 0px 5px black;
+    border-bottom: 3px solid black;
+    transition: all 0.2s ease-in;
+}
+
+#login-form .logged-out{
+	margin: -0.5rem auto 1rem auto;
+	background-color: #0275d8;
+	color: white;
+	padding: 0.5rem 0;
+	width: 60%;
+}
+
+#login-form .incorrect-login{
+	margin: -0.5rem auto 1rem auto;
+	background-color: red;
+	color: white;
+	padding: 0.5rem 0;
+	width: 60%;
+}
+
+#login-form input{
+    border-radius: 8px;
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    outline: none;
+    width: 100%; 
+    padding: 12px 40px; 
+    margin: 8px 0; 
+    display: inline-block; 
+    padding-left: 3.6rem;
+}
+
+.input-group{
+    position: relative;
+    width: 50%;
+	margin: auto;
+}
+
+.input-group .input-icon{
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    color: #115AA3;
+    font-size: 1.2rem;
+}
+
+.input-group .input-icon::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 15px;
+    top: 0px;
+    height: 45px;
+    border-right: 2px solid #115AA3;
+    margin-top: -0.75rem;
+    margin-left: 0.8rem;
+    background-color: purple;
+}
+
+.input-group > .check, .input-group > .error{
+    position: absolute;
+    top: 30%;
+    right: 5%;
+    color: #03A91D;
+    font-size: 1.4rem;
+    display: none;
+}
+
+.input-group > .error{
+    color: red;
+}
+
+#login-button{
+    display: block;
+    margin: 1.6rem auto;
+    margin-bottom: 1.6rem;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 7px;
+    background-color: #115AA3;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#sign-up-button:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 0px 10px #115AA3;
+}
+
+#login-form .register-page{
+    display: block;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+}
+
+#login-form .register-page a, #login-form #forgotten-password{
+    text-decoration: none;
+    color: #115AA3;
+    padding-left: 0.2rem;
+}
+
+#login-form #forgotten-password{
+    display: inline-block;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 550;
+    cursor: pointer;
+}
+
+#login-form .register-page a:hover, #login-form #forgotten-password:hover{
+    color: #5F86ED;
+    transition: all 0.2s ease-in;
+}
+
+/* forgotten password form */
+
+#forgotten-password-form{
+    display: none;
+    width: 40%;
+    margin: 0.1rem auto;
+    text-align: center;
+    padding: 1rem;
+}
+
+#forgotten-password-form h2{
+    font-size: 1.1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+#forgotten-password-form .email-sent{
+	display: none;
+}
+
+#forgotten-password-form input{
+    border-radius: 8px;
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    outline: none;
+    width: 41%; 
+    padding: 12px 15px; 
+    margin: 8px 0; 
+    display: inline-block; 
+}
+
+#forgotten-password-form button{
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: #115AA3;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#login-button:hover, #forgotten-password-form button:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 0px 10px #115AA3;
+}
+
+#login-form input:focus, #forgotten-password-form input:focus{
+    box-shadow: 0 0 20px #91ECDB;
+}
+
+
+/* media */
+
+@media(max-width: 1100px){
+    #login-form{
+        width: 50%;
+        left: 25%;
+    }
+    
+    #forgotten-password-form{
+        width: 50%;
+    }
+
+    #forgotten-password-form input{
+        width: 40%;
+    }
+}
+
+@media(max-width: 900px){
+    #login-form{
+        width: 60%;
+        left: 20%;
+    }
+
+    #forgotten-password-form{
+        width: 60%;
+    }
+
+    #forgotten-password-form input{
+        width: 45%;
+    }
+}
+
+@media(max-width: 700px){
+    #login-form{
+        width: 70%;
+        left: 15%;
+    }
+
+    #forgotten-password-form{
+        width: 70%;
+    }
+
+    #forgotten-password-form input{
+        width: 50%;
+    }
+
+    #login-form h2{
+        width: 35%;
+    }
+
+    .input-group{
+        width: 60%;
+    }
+}
+
+@media(max-width: 500px){
+    #login-form{
+        width: 80%;
+        left: 10%;
+    }
+
+    #forgotten-password-form{
+        width: 80%;
+    }
+
+    #forgotten-password-form input{
+        width: 55%;
+    }
+
+    #login-form h2{
+        width: 40%;
+    }
+
+    .input-group{
+        width: 65%;
+    }
+}
+
+
+   

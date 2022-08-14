@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/menu}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link th:href="@{/css/user-page.css}" rel="stylesheet" />
+</head>
+<body>
+    
+    <div layout:fragment="content">
+
+        <div class="user-selection">
+            <div class="active" id="show-cart">Shopping Cart <i class="fas fa-shopping-cart"></i> (<p th:text="${itemsInCart}"></p>)</div>
+
+            <div class="inactive" id="show-purchased-goods">Purchased Goods <i class="fas fa-shopping-bag"></i> (<p th:text="${totalPurchasedItems}"></p>)</div>
+
+            <div class="inactive" id="show-settings">Settings <i class="fas fa-cog"></i></div>
+        </div>
+
+
+        <!-- User Cart-->
+
+        <div class="user-cart">
+
+            <div th:if="${itemsInCart > 0}" class="total-price">Total price: $<h3 th:text="${cartTotalPrice}"></h3></div>
+            <div th:unless="${itemsInCart != 0}" class="total-price">Cart is empty.</div>
+
+            <div class="product-list">
+                <div th:each="cartItem : ${cart}" class="product">
+                	<img th:if="${#strings.length(cartItem.product.image) > 0}" th:src="*{'data:image/jpeg;base64,'+{cartItem.product.image}}">
+               
+               		<img th:if="${#strings.length(cartItem.product.image) == 0}" th:src="@{/img/picture-not-available.jpg}">
+
+                    <div class="info">
+                    
+                        <h3 th:text="${cartItem.product.name}"></h3>
+                        <div class="price">$<p th:text="${cartItem.product.price}"></p> * <p th:text="${cartItem.quantity}"></p> = $<p th:text="${#numbers.formatDecimal((cartItem.product.price * cartItem.quantity), 1, 2, 'POINT')}"></p>
+                        </div>
+                    </div>
+
+                    <div class="remove">
+                    	<a th:href="@{/customers/removeFromCart(cartId=${cartItem.id})}" class="details">Remove <i class="fas fa-trash"></i></a>
+             
+                    	<a th:href="@{/customers/purchaseProduct(cartId=${cartItem.id})}" class="details">Purchase <i class="fas fa-shopping-bag"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Purchased Goods-->
+        
+        <div class="purchased-goods">
+            <div class="product-list">
+                <div th:each="purchasedItem : ${purchasedItems}" class="product">
+                	<img th:if="${#strings.length(purchasedItem.product.image) > 0}" th:src="*{'data:image/jpeg;base64,'+{purchasedItem.product.image}}">
+               
+               		<img th:if="${#strings.length(purchasedItem.product.image) == 0}" th:src="@{/img/picture-not-available.jpg}">
+
+                    <div class="info">
+                        <h2 th:text="${#dates.format(purchasedItem.orderDate, 'yyyy.MM.dd HH:mm')}" class="date"></h2>
+                        <h3 th:text="${purchasedItem.product.name}"></h3>
+                        <div class="price">$<p th:text="${purchasedItem.product.price}"></p> * <p th:text="${purchasedItem.quantity}"></p> = $<p th:text="${#numbers.formatDecimal((purchasedItem.product.price * purchasedItem.quantity), 1, 2, 'POINT')}"></p></div>
+
+ 						<form th:if="${!#lists.contains(ratedProductIds, purchasedItem.product.id)}" action="#" th:action="@{/products/rateProduct(productId=${purchasedItem.product.id})}" class="review">
+                         	<input type="hidden" name="productId" th:value="${purchasedItem.product.id}" />
+                         	<input type="hidden" name="customerId" th:value="${purchasedItem.customer.id}" />
+                            <div class="rating">
+                                <p>Your Rating: </p>
+                                <select name="rating">
+                                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}"></option>
+                                </select>
+                            </div>
+                            
+                            <p class="error">Maximum 400 characters are allowed.</p>
+                            <textarea name="opinion" id="" placeholder="Your Opinion (maximum 400 characters)"></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+						
+						  <div th:each="theRating: ${theCustomer.productRatings}" class="ma">
+						  		<div th:if="${theRating.product.id == purchasedItem.product.id}" class="added-rating">
+		                         	<div class="rating">Your Rating: <p th:text="${theRating.rating}"></p></div>
+		                         	<p class = "mt">Your opinion:</p>
+			                        <p th:text="${theRating.opinion}" class="opinion"></p>
+				             	</div>  
+					  		</div>	
+			                 
+                    	</div>
+                	</div>
+
+            	</div>
+        	</div>
+
+        <!-- Settings-->
+
+        <div class="settings">
+            <form action="#" th:action="@{/customers/changeDetails(customerId=${theCustomer.id})}">
+            	<input type="hidden" name="customerId" th:value="${theCustomer.id}" />
+
+                <h2>Personal Details</h2>
+                
+                <h3 class="email-error"></h3>
+            	<h3 class="password-error"></h3>
+            	
+                <div class="input-group">
+                    <p>First Name:</p>
+                    <input type="text" name="firstName" id="firstName">
+                </div>
+                <div class="input-group">
+                    <p>Last Name:</p>
+                    <input type="text" name="lastName" id="lastName">
+                </div>
+                <div class="input-group">
+                    <p>Email:</p>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div class="input-group">
+                    <p>New Password:</p>
+                    <input type="password" name="password1" id="password1">
+                </div>
+                <div class="input-group">
+                    <p>Confirm Password:</p>
+                    <input type="password" name="password2" id="password2">
+                </div>
+
+                <h2>Contact Details</h2>
+                
+                <div class="input-group">
+                    <p>Country:</p>
+                    <input type="text" name="country" id="country">
+                </div>
+                <div class="input-group">
+                    <p>City:</p>
+                    <input type="text" name="city" id="city">
+                </div>
+                <div class="input-group">
+                    <p>Zip Code:</p>
+                    <input type="text" name="zipCode" id="zipCode">
+                </div>
+                <div class="input-group">
+                    <p>Address:</p>
+                    <input type="text" name="address" id="address">
+                </div>
+                <div class="input-group">
+                    <p>Phone:</p>
+                    <input type="text" name="phone" id="phone">
+                </div>
+
+                <button type="submit">Change</button>
+            </form>
+        </div>
+
+        <script type="text/javascript" th:src="@{/js/user-page.js}"></script>
+
+    </div>
+    
+</body>
+</html>

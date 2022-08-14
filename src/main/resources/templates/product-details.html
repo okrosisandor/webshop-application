@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/menu}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link th:href="@{/css/product-details.css}" rel="stylesheet" />
+    <title>Xiaomi Redmi Note 9 Pro 128GB 6GB RAM Dual Mobiltelefon</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+        <section class="details">
+
+			<img th:if="${#strings.length(product.image) > 0}" th:src="*{'data:image/jpeg;base64,'+{product.image}}" id="big-image" alt="product-img">
+               
+            <img th:if="${#strings.length(product.image) == 0}" th:src="@{/img/picture-not-available.jpg}">
+
+            <div class="content">
+
+                <h2 th:text="${product.name}"></h2>
+                <div class="review">
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                    </div>
+                    
+                    <p th:if="${averageRating != 0.0}"><span th:text="${#numbers.formatDecimal((averageRating), 1, 1)}" class="rating"> </span><span> (</span><span th:text="${numberOfReviews}" class="total-number-of-ratings"></span><span> reviews)</span></p>
+                    
+                    <p th:unless="${averageRating != 0.0}"><span class="rating">There are no ratings yet.</p>
+                </div>
+
+                <div class="description">
+
+                    <p th:text="${product.productDetail.description}"></p>                            
+                </div>
+
+                <div class="order">
+                    <p class="currency">$<span th:text="${product.price}" class="price"></span> </p>
+                    <form action="#" th:action="@{/customers/addtocart(productId=${product.id})}" class="cart">
+                    	<input type="hidden" name="productId" th:value="${product.id}" />
+                        <input type="text" name="quantity" id="" placeholder="Quantity" min="1">
+                        <button type="submit"><i class="fas fa-shopping-cart"></i></button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <div th:object="${product}" class="bigger-image-modal">
+            <div class="modal-content">
+                <div class="top">
+                    <p id="close"><i class="far fa-times-circle"></i></p>
+                </div>
+             <img th:src="*{'data:image/jpeg;base64,'+{image}}" alt="">
+            </div>
+        </div>
+
+        <section class="opinions">
+            
+            <h2>Opinions (<span th:text="${numberOfReviews}"></span>)</h2>
+            
+            
+            <div th:each="theRating : ${productRatings}" class="opinion">
+                <h1 th:text="${#dates.format(theRating.dateOfRating, 'yyyy.MM.dd HH:mm')}"></h1>
+                <div class="header">
+                    <h3 th:text="${theRating.customer.userName}" class="Username"></h3>
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                    </div>
+                </div>
+                
+                <h4 th:text="${theRating.rating}" class="customer-rating"></h4>
+                <p th:text="${theRating.opinion}" class="review-text"></p>
+            </div>
+
+        </section>
+
+        <div th:if = "${totalPages > 1}" class="pages">
+            	<a th:if="${currentPage > 1}" th:href="@{'/products/productDetail/' + ${currentPage - 1}(productId=${product.id})}"><i class="fas fa-chevron-left"></i></a>
+				
+				<span th:if="${currentPage < 4}">
+					<span th:each="i: ${#numbers.sequence(1, totalPages > 5 ? 5 : totalPages)}">
+					
+						<a th:if="${currentPage != i}" th:href="@{'/products/productDetail/' + ${i}(productId=${product.id})}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+				
+				<span th:if="${currentPage == totalPages and currentPage == 4}">
+					<span th:each="i: ${#numbers.sequence(totalPages - 4 > 1 ? totalPages - 4 : 1, totalPages)}">
+					
+						<a th:if="${currentPage != i}" th:href="@{'/products/productDetail/' + ${i}(productId=${product.id})}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+				
+				<span th:if="${currentPage > totalPages - 2 and totalPages > 4}">
+					<span th:each="i: ${#numbers.sequence(totalPages - 4 > 1 ? totalPages - 4 : 1, totalPages)}">
+					
+						<a th:if="${currentPage != i}" th:href="@{'/products/productDetail/' + ${i}(productId=${product.id})}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+				
+				
+				<span th:if="${currentPage gt 3 and currentPage lt totalPages - 1}">
+					<span th:each="i: ${#numbers.sequence(currentPage - 2, currentPage + 2)}">
+					
+						<a th:href="@{'/products/productDetail/' + ${i}(productId=${product.id})}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" class="inactive">[[${i}]]</span>
+					</span>
+				</span>
+					
+				<a th:if="${currentPage < totalPages}" th:href="@{'/products/productDetail/' + ${currentPage + 1}(productId=${product.id})}"><i class="fas fa-chevron-right"></i></a>
+        </div>
+        
+        <script type="text/javascript" th:src="@{/js/product-details.js}"></script>
+        
+    </div>
+    
+</body>
+</html>

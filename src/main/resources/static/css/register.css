@@ -1,0 +1,245 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right, #4DA0B0, #D39D38);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input{
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #115AA3;
+    font-size: 1rem;
+    outline: none;
+    width: 100%; 
+    padding: 12px 40px; 
+    margin: 8px 0; 
+    display: inline-block; 
+    padding-left: 3.6rem;
+    color: #222;
+}
+
+.input-group{
+    position: relative;
+    margin-bottom: 0.4rem;
+}
+
+
+.input-group #password1errorText, .input-group #password2errorText{
+	display: none;
+}
+
+.input-group .input-icon{
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    color: #115AA3;
+    font-size: 1.2rem;
+}
+
+.input-group .input-icon::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 15px;
+    top: 0px;
+    height: 45px;
+    border-right: 2px solid #115AA3;
+    margin-top: -0.75rem;
+    margin-left: 0.8rem;
+    background-color: purple;
+}
+
+.input-group > .check, .input-group > .error{
+    position: absolute;
+    top: 30%;
+    right: 3%;
+    color: #03A91D;
+    font-size: 1.4rem;
+    display: none;
+}
+
+.input-group > .error{
+    color: red;
+}
+
+.input-group .error-message{
+	position: absolute;
+	top: -25%;
+	left: 0px;
+	color: red;
+}
+
+.input-group h3.error-message{
+	display: none;
+	font-size: 1.2rem;
+	font-weight: normal;
+}
+
+
+.general .input-group:nth-of-type(2), .general .input-group:nth-of-type(3){
+    display: inline-block;
+    width: 47.5%;
+}
+
+.general .input-group:nth-of-type(2){
+    margin-right: 0.8rem;
+}
+
+#register-form{
+    width: 80%;
+    margin: 1rem auto 1rem auto;
+    box-shadow: 0px 0px 35px black;
+}
+
+#register-form .activation-info{
+    margin: 0 auto 1rem auto;
+    color: darkgreen;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+#register-form h2{
+    text-align: center;
+    border-bottom: 2px solid black;
+    width: 25%;
+    padding-top: 1.5rem;
+    margin: 1.5rem auto;
+    padding-bottom: 0.4rem;
+    font-size: 1.7rem;
+}
+
+#register-form h2:hover{
+    text-shadow: 0px 0px 5px black;
+    border-bottom: 3px solid black;
+    transition: all 0.2s ease-in;
+}
+
+.info{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    margin: auto;
+    grid-gap: 50px;
+}
+
+.info p{
+    text-align: center;
+    margin-bottom: 1.6rem;
+    font-size: 1.2rem;
+}
+
+.info span{
+    border: 1px solid black;
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+}
+
+#sign-up-button{
+    display: block;
+    margin: 1.6rem auto;
+    margin-bottom: 1.6rem;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 7px;
+    background-color: #115AA3;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#sign-up-button:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 0px 10px #115AA3;
+}
+
+#register-form .login-page{
+    display: block;
+    padding-left: 5rem;
+    padding-bottom: 1.6rem;
+    font-size: 1rem;
+}
+
+#register-form .login-page a{
+    text-decoration: none;
+    color: #115AA3;
+    padding-left: 0.2rem;
+}
+
+#register-form .login-page a:hover{
+    color: #5F86ED;
+    transition: all 0.2s ease-in;
+}
+
+#register-form input:focus{
+    box-shadow: 0 0 20px #91ECDB;
+}
+
+
+/* media */
+
+@media(max-width: 1150px){
+    .general .input-group:nth-of-type(2), .general .input-group:nth-of-type(3){
+        width: 47%;
+    }
+
+    .general .input-group:nth-of-type(2){
+        margin-right: 0.6rem;
+    }
+}
+
+@media(max-width: 900px){
+    #register-form{
+        width: 60%;
+    }
+
+    #register-form h2{
+        width: 30%;
+    }
+
+    .info{
+        grid-template-columns: 1fr;
+        width: 75%;
+    }
+
+    .general .input-group:nth-of-type(2){
+        width: 48%;
+    }
+}
+
+@media(max-width: 700px){
+    #register-form{
+        width: 70%;
+    }
+
+    #register-form h2{
+        width: 40%;
+    }
+
+    .general .input-group:nth-of-type(2), .general .input-group:nth-of-type(3){
+        width: 100%;
+    }
+
+    .general .input-group:nth-of-type(2){
+        margin-right: 0;
+    }
+
+    #register-form .login-page{
+        padding-left: 3.5rem;
+    }
+}
+
+@media(max-width: 500px){
+    #register-form{
+        width: 80%;
+    }
+}
