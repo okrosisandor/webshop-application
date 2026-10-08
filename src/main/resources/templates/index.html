@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/menu}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+	<link th:href="@{/css/variables.css}" rel="stylesheet" />
+    <link th:href="@{/css/product-categories.css}" rel="stylesheet" />
+    <title>Home</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+		<section class="categories">
+		    <div th:each="entry : ${categoryCounts}" class="category-wrapper">
+		        <a th:href="@{/products/products/{name}(name=${entry.key})}" class="category">
+		            <i th:class="${entry.key == 'Bedroom' ? 'fas fa-bed' : 
+		                           entry.key == 'Bathroom' ? 'fas fa-bath' :
+		                           entry.key == 'Vehicles' ? 'fas fa-car' :
+		                           entry.key == 'Computers' ? 'fas fa-desktop' :
+		                           entry.key == 'Sports' ? 'fas fa-futbol' :
+		                           entry.key == 'Laptops' ? 'fas fa-laptop' :
+		                           entry.key == 'Mobile Phones' ? 'fas fa-mobile-alt' :
+		                           entry.key == 'Tablets' ? 'fas fa-tablet-alt' :
+		                           entry.key == 'Tools' ? 'fas fa-tools' :
+		                           entry.key == 'Clothing' ? 'fas fa-tshirt' :
+		                           entry.key == 'TV & Video' ? 'fas fa-tv' :
+		                           entry.key == 'Kitchen' ? 'fas fa-utensils' : 'fas fa-box'}"></i>
+		            
+		            <p th:text="${entry.key}"></p>
+		            <p th:text="${entry.value}" class="number-of-items-in-category"></p>
+		        </a>
+		    </div>
+		</section>
+
+
+    </div>
+</body>
+</html>

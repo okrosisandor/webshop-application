@@ -1,0 +1,39 @@
+# === Java / Spring Boot ===
+target/
+build/
+.gradle/
+*.class
+*.jar
+*.war
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# === Eclipse / STS workspace ===
+.metadata/
+
+# === IDEs & Editors ===
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+/nbproject/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+*.sublime-workspace
+
+# === Operating System ===
+.DS_Store
+Thumbs.db

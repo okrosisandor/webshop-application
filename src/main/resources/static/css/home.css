@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 85%;
+    margin: auto;
+}
+
+.main-header{
+    height: 100vh;
+    background: url("../img/pexels-andrea-piacquadio-3768894.jpg") center center/cover no-repeat;
+}
+
+.main-header .topbar{
+    display: flex;
+    padding-top: 2rem;
+    align-items: flex-end;
+}
+
+.logo{
+    height: 100px;
+    width: auto;
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    text-decoration: none;
+    color: black;
+}
+
+.logo h2{
+    font-size: 3.8rem;
+}
+
+.logo p{
+    font-size: 1.4rem;
+    padding-left: 1.5rem;
+}
+
+.main-header .menu{
+    margin-left: auto;
+    align-self: flex-start;
+}
+
+.main-header .menu ul{
+    display: inline;
+}
+
+.main-header .menu li{
+    display: inline-block;
+    padding: 1rem;
+    color: white;
+    text-transform:uppercase;
+}
+
+.main-header .menu .icon{
+    padding: 0.6rem;
+}
+
+.main-header .menu .icon a{
+    font-size: 1.5rem;
+}
+
+.main-header .menu a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+input{
+    display: inline;
+}

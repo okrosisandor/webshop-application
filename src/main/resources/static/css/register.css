@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#register-form input{
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    font-size: 1rem;
+    outline: none;
+    width: 100%; 
+	padding: 12px;
+    margin: 8px 0; 
+    display: inline-block; 
+    padding-left: 3.2rem;
+    color: #222;
+}
+
+#register-form .input-group{
+    position: relative;
+    margin-bottom: 0.4rem;
+}
+
+
+#register-form .input-group #password1errorText, #register-form .input-group #password2errorText{
+	display: none;
+}
+
+#register-form .input-group .input-icon{
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+#register-form .input-group .input-icon::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 15px;
+    top: 0px;
+    height: 44px;
+    border-right: 2px solid var(--primary-color);
+    margin-top: -0.75rem;
+    margin-left: 0.8rem;
+    background-color: purple;
+}
+
+#register-form .input-group > .check, #register-form .input-group > .error{
+    position: absolute;
+    top: 30%;
+    right: 3%;
+    color: #03A91D;
+    font-size: 1.4rem;
+    display: none;
+}
+
+#register-form .input-group > .error{
+    color: red;
+}
+
+#register-form .input-group .error-message{
+	position: absolute;
+	top: -25%;
+	left: 0px;
+	color: red;
+}
+
+#register-form .input-group h3.error-message{
+	display: none;
+	font-size: 1.2rem;
+	font-weight: normal;
+}
+
+#register-form{
+    width: 80%;
+    margin: 1rem auto 1rem auto;
+    box-shadow: 0px 0px 35px black;
+	background-color: #eee;
+}
+
+#register-form .activation-info, .activation-warning{
+    margin: 0 auto 1rem auto;
+    color: darkgreen;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+	
+#register-form .activation-warning{
+	color: orangered;
+}
+
+#register-form h2{
+    text-align: center;
+    border-bottom: 2px solid black;
+    width: 25%;
+    padding-top: 1.5rem;
+    margin: 1.5rem auto;
+    padding-bottom: 0.4rem;
+    font-size: 1.7rem;
+}
+
+#register-form h2:hover{
+    text-shadow: 0px 0px 5px black;
+    border-bottom: 3px solid black;
+    transition: all 0.2s ease-in;
+}
+
+.info{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    width: 85%;
+    margin: auto;
+    grid-gap: 50px;
+}
+
+.info p{
+    text-align: center;
+    margin-bottom: 1.6rem;
+    font-size: 1.2rem;
+}
+
+.info span{
+    border: 1px solid black;
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.4rem;
+    border-radius: 50%;
+}
+
+#sign-up-button{
+    display: block;
+    margin: 1.6rem auto;
+    margin-bottom: 1.6rem;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 7px;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#sign-up-button:hover{
+    background-color: #5F86ED;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 0px 10px var(--primary-color);
+}
+
+#register-form .login-page{
+    display: block;
+    padding-left: 5rem;
+    padding-bottom: 1.6rem;
+    font-size: 1rem;
+}
+
+#register-form .login-page a{
+    text-decoration: none;
+    color: var(--primary-color);
+    padding-left: 0.2rem;
+}
+
+#register-form .login-page a:hover{
+    color: #5F86ED;
+    transition: all 0.2s ease-in;
+}
+
+#register-form input:focus{
+    box-shadow: 0 0 20px #91ECDB;
+}
+
+
+/* media */
+
+@media(max-width: 900px){
+    #register-form{
+        width: 80%;
+    }
+
+    #register-form h2{
+        width: 30%;
+    }
+
+    .info{
+        grid-template-columns: 1fr;
+        width: 75%;
+    }
+}
+
+@media(max-width: 700px){
+    #register-form{
+        width: 100%;
+    }
+
+    #register-form .login-page{
+        padding-left: 3.5rem;
+    }
+}
+
